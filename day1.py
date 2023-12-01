@@ -25,14 +25,13 @@ def part2(lines: [str]):
     for line in lines:
         
         digits = {"one": "1", "two": "2", "three": "3", "four": "4", "five":"5", "six":"6", "seven":"7", "eight":"8", "nine":"9"}
-        
+        print("Before: " + line)
         # see if any of the digits in word form exist, and if they do, add a number beside them
         for word in digits.keys():
             i = line.find(word)
             if (i >= 0):
-                # kinda cursed
-                line = line[:i] + word + digits[word] + word + line[i:]
-        
+                line = line.replace(word, word + digits[word] + word)
+        # line.replace("one", "one1one").replace("two", "two2two").replace("three", "three3three").replace("four", "four4four").replace("five", "five5five").replace("six", "six6six").replace("seven", "seven7seven").replace("eight", "eight8eight").replace("nine", "nine9nine").filter { isdigit() }
         
             
         first = ""
@@ -45,7 +44,8 @@ def part2(lines: [str]):
                 if first == "":
                     first = c
         print(first + last)
-        print(line)
+        print("After: " + line)
+     
         sums.append(int(first+last))
         
         
