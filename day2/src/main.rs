@@ -8,29 +8,55 @@ use regex::Regex;
 
 fn main() {
     let lines = get_input("day2.txt");
+    part_1(lines);    
+} 
+
+
+
+fn part_1(lines: Vec<String>) {
+    let mut ids: Vec<usize> = Vec::new();
 
     for (i, line) in lines.iter().enumerate() {
         let start = line.find(':');
         println!("{}", line);
 
-        match start {
-            Some(x) => {
-                // find the part after the ':'
-                let ss: String = line.chars().skip(x + 2).collect();
-
-                // check each set
-                let game = ss.split(";");
-
-
-                for set in game {
-                    println!("{}", is_set_valid(set.to_string()));
-                }
-
-            }
-            None    => println!("Somehow, : not found"),
+        if is_game_valid(line, start) {
+            println!("{} is valid", i + 1);
+            ids.push(i + 1);
         }
+
+       
     }
-} 
+
+    println!("{}", ids.iter().sum::<usize>());
+}
+
+fn is_game_valid(line: &String, start: Option<usize>) -> bool {
+    match start {
+        Some(x) => {
+            // find the part after the ':'
+            let ss: String = line.chars().skip(x + 2).collect();
+
+            // check each set
+            let game = ss.split(";");
+
+
+            for set in game {
+                let result =  is_set_valid(set.to_string());
+
+                if !result {
+                    return result;
+                }
+                   
+            }
+
+            return true
+
+        }
+        None    => {println!("Somehow, : not found"); false},
+    }
+
+}
 
 
 
@@ -58,10 +84,10 @@ fn is_set_valid(line: String) -> bool {
                     if color.contains("blue") && test > 14 {
 
                         return false;
-                    } else if color.contains("red") && test > 13 {
+                    } else if color.contains("red") && test > 12 {
                
                         return false;
-                    } else if color.contains("green") && test > 12 {
+                    } else if color.contains("green") && test > 13 {
                       
                         return false;
                     } 
