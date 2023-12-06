@@ -1,7 +1,7 @@
 # aoc2023
 Advent of Code 2023.
 
-The Advent of Code challenge is an annual challenge from December 1st to 25th.
+My solutions to the 2023 edition of [Advent of Code](https://adventofcode.com/2023).
 
 Language: Rust/Python
 
