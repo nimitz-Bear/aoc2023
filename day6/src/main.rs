@@ -74,7 +74,4 @@ fn part_2() {
     println!("{}", highest_mil);
 
     println!("Part 2: {}", highest_mil - lowest_mil + 1);
-
-    
-
 }
